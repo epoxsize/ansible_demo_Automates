@@ -34,7 +34,6 @@ ansible_port=5986
 ansible_winrm_server_cert_validation=ignore
 
 
-
 [rhel-local]
 rhel81 ansible_host=172.16.23.133
 rhel82 ansible_host=172.16.23.134
