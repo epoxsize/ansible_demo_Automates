@@ -1,7 +1,5 @@
 ---
-- hosts: rhel-local
-  gather_facts: true
-  become: true
+- hosts: all
   tasks:
     - name: Checking the kernel version
       command: "cat /etc/redhat-release"
