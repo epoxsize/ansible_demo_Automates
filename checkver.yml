@@ -1,0 +1,14 @@
+---
+- hosts: rhvsrv
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Checking the kernel version
+      command: "whoami"
+
+- hosts: rhvm
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Checking the kernel version
+      command: "whoami"

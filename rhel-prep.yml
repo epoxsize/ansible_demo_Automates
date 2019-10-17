@@ -1,0 +1,61 @@
+---
+- hosts: rhel-local
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Checking the kernel version
+      command: "cat /etc/redhat-release"
+    - name: Setting Up RHSM
+      redhat_subscription:
+          username: "{{ rhsm_username }}"
+          password: "{{ rhsm_password }}"
+          auto_attach: yes
+          force_register: no
+      tags: register_rhel
+
+##### Disabling all repos and subscribing to RHSM + enabling repos for RHEL8
+
+    - name: Setting Up Repository for RHEL | Disabling all repos
+      rhsm_repository:
+          state: disabled 
+          name: "*"
+    - name: Setting up Repos for RHEL8
+      rhsm_repository:
+          state: present 
+          name: "{{ item }}" 
+      when: 
+        - ansible_distribution == "RedHat"
+        - ansible_distribution_major_version == "8"
+      with_items:
+        - rhel-8-for-x86_64-baseos-rpms
+        - rhel-8-for-x86_64-appstream-rpms
+      tags: register_rhel8
+
+    - name: Setting up Repos for RHEL7 
+      rhsm_repository:
+          state: present 
+          name: "{{ item }}" 
+      when: 
+        - ansible_distribution == "RedHat"
+        - ansible_distribution_major_version == "7"
+      with_items:
+        - rhel-7-server-rpms
+        - rhel-7-server-optional-rpms
+        - rhel-7-server-extras-rpms
+        - rhel-7-server-supplementary-rpms
+      tags: register_rhel7
+
+    - name: Upgrading package to the latest versions
+      dnf:
+        state: latest
+        name: "*"
+      when: 
+        - ansible_distribution == "RedHat"
+        - ansible_distribution_major_version == "8"
+    - name: Installing packages for basework
+      package:
+          state: present
+          name: "{{ item }}"
+      with_items:
+        - tmux
+        - mc

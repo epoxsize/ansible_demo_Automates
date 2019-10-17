@@ -1,0 +1,15 @@
+---
+- hosts: windom
+  gather_facts: true
+  vars:
+    ansible_user: Administrator@automates.demo
+    ansible_password: 123qweASD
+  tasks:
+    - name: Add new user to Domain
+      win_domain_user:
+        name: Ansible_Autom
+        upn: somebody@automates.demo
+        password: RedHat@redhat.99
+        state: present
+        groups:
+          - Domain Admins
