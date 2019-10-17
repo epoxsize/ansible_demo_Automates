@@ -21,4 +21,3 @@ windomain ansible_host=172.16.23.138
 rhel81 ansible_host=172.16.23.133
 rhel82 ansible_host=172.16.23.134
 rhel83 ansible_host=172.16.23.135
-rhel7-tower ansible_host=172.16.23.139
