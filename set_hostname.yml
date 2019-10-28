@@ -3,5 +3,5 @@
   tasks:
     - name: Setting up Hostname according to the tower invenory
       hostname:
-        name: "{{ ansible_nodename }}" 
+        name: "{{ inventory_hostname }}" 
       
