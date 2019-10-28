@@ -4,4 +4,3 @@
     - name: Setting up Hostname according to the tower invenory
       hostname:
         name: "{{ inventory_hostname }}" 
-      
