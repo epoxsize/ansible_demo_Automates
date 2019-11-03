@@ -28,7 +28,7 @@
    - name: Enable Telegraf Service
      service:
       name: telegraf
-      state: enabled
+      state: started
      when: 
      - ansible_system == "Linux"
 
