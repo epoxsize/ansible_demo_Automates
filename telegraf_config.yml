@@ -21,7 +21,7 @@
    - name: Copying configuration and customizing it
      template:
       src: telegraf.j2
-      dst: /etc/telegraf/telegraf.conf
+      dest: /etc/telegraf/telegraf.conf
      notify: Restart telegraf service
      when: 
      - ansible_system == "Linux"
