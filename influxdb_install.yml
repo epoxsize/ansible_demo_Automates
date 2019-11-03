@@ -49,8 +49,6 @@
         - name: Create database using custom credentials
           influxdb_database:
               hostname: "{{influxdb_hostname}}"
-              username: "{{influxdb_username}}"
-              password: "{{influxdb_password}}"
               database_name: "{{influxdb_database_name}}"
       #### Handlers for handle some changes in configuration
       when:
