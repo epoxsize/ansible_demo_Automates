@@ -33,7 +33,7 @@
      - ansible_system == "Linux"
 
   handlers: 
-    - name: Restart telegraf config
+    - name: Restart telegraf service
       service:
         name: telegraf
         state: restarted
