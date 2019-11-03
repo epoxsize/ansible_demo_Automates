@@ -17,9 +17,37 @@
        dest: /etc/influxdb/influxdb.conf
      notify:
        - Starting Up the influxdb Service
+   - name: Ensuring that firewallD is enabled
+     service:
+         name: firewalld # required. Name of the service.
+         state: started # not required. choices: reloaded;restarted;started;stopped. C(started)/C(stopped) are idempotent actions that will not run commands unless necessary.  C(restarted) will always bounce the service.  C(reloaded) will always reload. B(At least one of state and enabled are required.) Note that reloaded will start the service if it is not already started, even if your chosen init system wouldn't normally.
+   - name: Enabling InfluxDB ports in Firewall
+     firewalld:
+         state: enabled # required. choices: enabled;disabled;present;absent. Enable or disable a setting. For ports: Should this port accept(enabled) or reject(disabled) connections. The states "present" and "absent" can only be used in zone level operations (i.e. when no other parameters but zone and state are set).
+         permanent: yes # not required. Should this configuration be in the running firewalld configuration or persist across reboots. As of Ansible version 2.3, permanent operations can operate on firewalld configs when it's not running (requires firewalld >= 3.0.9). (NOTE: If this is false, immediate is assumed true.)d
+         port: '{{ item }}/tcp' # not required. Name of a port or port range to add/remove to/from firewalld. Must be in the form PORT/PROTOCOL or PORT-PORT/PROTOCOL for port ranges.
+     loop:
+       - 8086
+       - 8082
+   - name: Restarting firewallD serice
+     service:
+         name: firewalld # required. Name of the service.
+         state: reloaded # not required. choices: reloaded;restarted;started;stopped. C(started)/C(stopped) are idempotent actions that will not run commands unless necessary.  C(restarted) will always bounce the service.  C(reloaded) will always reload. B(At least one of state and enabled are required.) Note that reloaded will start the service if it is not already started, even if your chosen init system wouldn't normally.
+
+#### Setting up influxdb DB
+   - name: Create database using custom credentials
+     influxdb_database:
+        hostname: "{{influxdb_hostname}}"
+        username: "{{influxdb_username}}"
+        password: "{{influxdb_password}}"
+        database_name: "{{influxdb_database_name}}"
+
+#### Handlers for handle some changes in configuration
+
   handlers:
    - name: Starting Up the influxdb Service
      service:
          name: influxdb # required. Name of the service.
          enabled: true # not required. Whether the service should start on boot. B(At least one of state and enabled are required.)
          state: restarted # not required. choices: reloaded;restarted;started;stopped. C(started)/C(stopped) are idempotent actions that will not run commands unless necessary.  C(restarted) will always bounce the service.  C(reloaded) will always reload. B(At least one of state and enabled are required.) Note that reloaded will start the service if it is not already started, even if your chosen init system wouldn't normally.
+  
