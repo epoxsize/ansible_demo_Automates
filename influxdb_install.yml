@@ -9,7 +9,7 @@
       description: Influxdb Repository from influxdata.com
    - name: Installing InfluxDB
      package:
-      state: absent # required. Whether to install (C(present)), or remove (C(absent)) a package. Other states depend on the underlying package module, i.e C(latest).
+      state: present # required. Whether to install (C(present)), or remove (C(absent)) a package. Other states depend on the underlying package module, i.e C(latest).
       name: influxdb # required. Package name, or package specifier with version, like C(name-1.0).,Be aware that packages are not always named the same and this module will not 'translate' them per distro.
    - name: Setting up influxdb config
      template:
