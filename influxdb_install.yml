@@ -34,7 +34,18 @@
          name: firewalld # required. Name of the service.
          state: reloaded # not required. choices: reloaded;restarted;started;stopped. C(started)/C(stopped) are idempotent actions that will not run commands unless necessary.  C(restarted) will always bounce the service.  C(reloaded) will always reload. B(At least one of state and enabled are required.) Note that reloaded will start the service if it is not already started, even if your chosen init system wouldn't normally.
 
-#### Setting up influxdb DB
+#### Setting up prerequisites for installing Influxdb and for managing host by ansible
+   - name: Installing Python3 pip for getting influxdb python module
+     package:
+       state: present
+       name: python3-pip
+   - name: Installing influxdb python module
+     pip:
+       name: influxdb # not required. The name of a Python library to install or the url(bzr+,hg+,git+,svn+) of the remote package.,This can be a list (since 2.2) and contain version specifiers (since 2.7).
+       state: present # not required. choices: absent;forcereinstall;latest;present. The state of module,The 'forcereinstall' option is only available in Ansible 2.1 and above.
+
+#### Setting up influxdb Database 
+
    - name: Create database using custom credentials
      influxdb_database:
         hostname: "{{influxdb_hostname}}"
