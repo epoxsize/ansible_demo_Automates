@@ -6,6 +6,7 @@
       name: InfluxDB Repository
       baseurl: https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
       gpgcheck: yes
+      description: Influxdb Repository from influxdata.com
    - name: Installing InfluxDB
      package:
       state: absent # required. Whether to install (C(present)), or remove (C(absent)) a package. Other states depend on the underlying package module, i.e C(latest).
