@@ -24,11 +24,11 @@
       when: 
         - ansible_distribution == "RedHat"
         - ansible_distribution_major_version == "8"
+        - enable_rhsm|bool == True
       with_items:
         - rhel-8-for-x86_64-baseos-rpms
         - rhel-8-for-x86_64-appstream-rpms
       tags: register_rhel8
-      when: enable_rhsm|bool == True
 
     - name: Setting up Repos for RHEL7 
       rhsm_repository:
@@ -37,13 +37,13 @@
       when: 
         - ansible_distribution == "RedHat"
         - ansible_distribution_major_version == "7"
+        - enable_rhsm|bool == True
       with_items:
         - rhel-7-server-rpms
         - rhel-7-server-optional-rpms
         - rhel-7-server-extras-rpms
         - rhel-7-server-supplementary-rpms
       tags: register_rhel7
-      when: enable_rhsm|bool == True
 
     - name: Upgrading package to the latest versions
       dnf:
