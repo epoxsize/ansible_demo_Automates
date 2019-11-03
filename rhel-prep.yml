@@ -8,14 +8,16 @@
           auto_attach: yes
           force_register: no
       tags: register_rhel
+      when: enable_rhsm|bool == True
 
-##### Disabling all repos and subscribing to RHSM + enabling repos for RHEL8
-
-    - name: Setting Up Repository for RHEL | Disabling all repos
+    - name: Disabling all repos
       rhsm_repository:
           state: disabled 
           name: "*"
-    - name: Setting up Repos for RHEL8
+      tags: register_rhel
+      when: enable_rhsm|bool == True
+
+    - name: Setting up repos
       rhsm_repository:
           state: present 
           name: "{{ item }}" 
@@ -26,6 +28,7 @@
         - rhel-8-for-x86_64-baseos-rpms
         - rhel-8-for-x86_64-appstream-rpms
       tags: register_rhel8
+      when: enable_rhsm|bool == True
 
     - name: Setting up Repos for RHEL7 
       rhsm_repository:
@@ -40,6 +43,7 @@
         - rhel-7-server-extras-rpms
         - rhel-7-server-supplementary-rpms
       tags: register_rhel7
+      when: enable_rhsm|bool == True
 
     - name: Upgrading package to the latest versions
       dnf:
@@ -48,6 +52,7 @@
       when: 
         - ansible_distribution == "RedHat"
         - ansible_distribution_major_version == "8"
+        - enable_rhsm|bool == True
     - name: Installing packages for basework
       package:
           state: present
