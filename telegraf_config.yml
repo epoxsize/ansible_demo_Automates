@@ -1,0 +1,44 @@
+---
+- hosts: all
+  tasks:
+   - name: Add Telegraf Repository
+     yum_repository:
+      name: InfluxDB Repository
+      baseurl: https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
+      gpgcheck: yes
+      description: Influxdb Repository from influxdata.com
+     when: 
+     - ansible_system == "Linux"
+   - name: Install telegraf package
+     package:
+      name: telegraf
+      state: present
+     when: 
+     - ansible_system == "Linux"
+
+#### Setting up telegraf config for Linux systems
+   
+   - name: Copying configuration and customizing it
+     template:
+      src: telegraf.j2
+      dst: /etc/telegraf/telegraf.conf
+     notify: Restart telegraf service
+     when: 
+     - ansible_system == "Linux"
+   - name: Enable Telegraf Service
+     service:
+      name: telegraf
+      state: enabled
+     when: 
+     - ansible_system == "Linux"
+
+  handlers: 
+    - name: Restart telegraf config
+      service:
+        name: telegraf
+        state: restarted
+      when: 
+      - ansible_system == "Linux"
+
+      
+
