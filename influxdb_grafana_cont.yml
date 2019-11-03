@@ -1,0 +1,14 @@
+---
+- hosts: all
+  tasks:
+   - name: Ensiring that podman is in the system
+     package:
+         state: present # required. Whether to install (C(present)), or remove (C(absent)) a package. Other states depend on the underlying package module, i.e C(latest).
+         name: podman # required. Package name, or package specifier with version, like C(name-1.0).,Be aware that packages are not always named the same and this module will not 'translate' them per distro.
+   - name: Pulling InfluxDB from the registry
+     podman_registry:
+       name: docker.io/influxdb:latest
+   - name: Pulling Grafana from the registry
+     podman_registry:
+       name: docker.io/grafana/grafana:latest
+   - 

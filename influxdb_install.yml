@@ -1,0 +1,24 @@
+---
+- hosts: all
+  tasks:
+   - name: Add Influxdb Repo
+     yum_repository:
+      name: InfluxDB Repository
+      baseurl: https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
+      gpgcheck: yes
+   - name: Installing InfluxDB
+     package:
+      state: absent # required. Whether to install (C(present)), or remove (C(absent)) a package. Other states depend on the underlying package module, i.e C(latest).
+      name: influxdb # required. Package name, or package specifier with version, like C(name-1.0).,Be aware that packages are not always named the same and this module will not 'translate' them per distro.
+   - name: Setting up influxdb config
+     template:
+       src: .influxdb.j2
+       dest: /etc/influxdb/influxdb.conf
+     notify:
+       - Starting Up the influxdb Service
+  handlers:
+   - name: Starting Up the influxdb Service
+     service:
+         name: influxdb # required. Name of the service.
+         enabled: true # not required. Whether the service should start on boot. B(At least one of state and enabled are required.)
+         state: restarted # not required. choices: reloaded;restarted;started;stopped. C(started)/C(stopped) are idempotent actions that will not run commands unless necessary.  C(restarted) will always bounce the service.  C(reloaded) will always reload. B(At least one of state and enabled are required.) Note that reloaded will start the service if it is not already started, even if your chosen init system wouldn't normally.
