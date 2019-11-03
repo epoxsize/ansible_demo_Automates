@@ -105,7 +105,7 @@
 
   ## The target database for metrics; will be created as needed.
   ## For UDP url endpoint database needs to be configured on server side.
-  # database = "{{ influxdb_database_name }}"
+  database = "{{ influxdb_database_name }}"
 
   ## The value of this tag will be used to determine the database.  If this
   ## tag is not set the 'database' option is used as the default.
@@ -472,7 +472,7 @@
 #   # %d - day of month (e.g., 01)
 #   # %H - hour (00..23)
 #   # %V - week of the year (ISO week) (01..53)
-#   ## Additionally, you can specify a tag name using the notation {{tag_name}}
+#   ## Additionally, you can specify a tag name using the notation
 #   ## which will be used as part of the index name. If the tag does not exist,
 #   ## the default tag value will be used.
 #   # index_name = "telegraf-{{host}}-%Y.%m.%d"
