@@ -44,5 +44,21 @@
             url: http://localhost:8086 # required. The URL of the datasource.
             grafana_user: admin
             grafana_password: '{{ grafana_password }}'
+      - name: Copy json file with pre-defined dashboard
+        copy:
+          src: ansible_demo_dashboard.json
+          dest: /tmp/ansible_demo_dashboard.json
+          mode: 0777
+      - name: Import Grafana Dashboard
+        grafana_dashboard:
+            url: http://localhost:3000 # required. The Grafana URL.
+            state: present # required. choices: absent;export;present. State of the dashboard.
+            url_password: '{{ grafana_password }}' # not required. The Grafana API password.
+            grafana_api_key: undefined # not required. The Grafana API key.,If set, I(grafana_user) and I(grafana_password) will be ignored.
+            slug: undefined # not required. Deprecated since Grafana 5. Use grafana dashboard uid instead.,slug of the dashboard. It's the friendly url name of the dashboard.,When C(state) is C(present), this parameter can override the slug in the meta section of the json file.,If you want to import a json dashboard exported directly from the interface (not from the api), you have to specify the slug parameter because there is no meta section in the exported json.
+            url_username: admin # not required. The Grafana API user.
+            path: /tmp/ansible_demo_dashboard.json
+            overwrite: yes
+            message: imported by ansible
      when:
       - "'mgmt' in group_names" 
