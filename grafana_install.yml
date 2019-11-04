@@ -35,5 +35,11 @@
 #### Setting up grafana server
       - name: Setting up Grafana Password
         command: 'grafana-cli admin reset-admin-password {{ grafana_password }}'
+      - name: Adding Influxdb Datasource
+        grafana_datasource:
+            grafana_url: localhost:3000 # required. The Grafana URL.
+            ds_type: influxdb # required. choices: graphite;prometheus;elasticsearch;influxdb;opentsdb;mysql;postgres;alexanderzobnin-zabbix-datasource. The type of the datasource.
+            name: InfluxDBAnsible-Demo # required. The name of the datasource.
+            url: http://localhost:8086 # required. The URL of the datasource.
      when:
       - "'mgmt' in group_names" 
