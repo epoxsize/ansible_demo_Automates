@@ -5,3 +5,15 @@
       win_chocolatey:
        name: telegraf
        state: present
+    - name: Setting up Telegraf config
+      win_template:
+          src: telegraf.j2 # required. Path of a Jinja2 formatted template on the local server. This can be a relative or absolute path.
+          dest: 'C:\Program Files\telegraf\telegraf.conf' # required. Location to render the template to on the remote machine.
+          force: yes # not required. If C(yes), will replace the remote file when contents are different from the source.,If C(no), the file will only be transferred if the destination does not exist.
+    - name: Setting up telegraf as windows Service
+      win_command: 'C:\"Program Files"\Telegraf\telegraf.exe --service install'
+    - name: Restarting Telegraf Service
+      win_service:
+          name: telegraf # required. Name of the service.,If only the name parameter is specified, the module will report on whether the service exists or not without making any changes.
+          start_mode: auto # not required. choices: auto;delayed;disabled;manual. Set the startup type for the service.,C(delayed) added in Ansible 2.3
+          state: restarted # not required. choices: absent;paused;started;stopped;restarted. C(started)/C(stopped)/C(absent)/C(pause) are idempotent actions that will not run commands unless necessary.,C(restarted) will always bounce the service.,C(absent) added in Ansible 2.3,C(pause) was added in Ansible 2.4,Only services that support the paused state can be paused, you can check the return value C(can_pause_and_continue).,You can only pause a service that is already started.
