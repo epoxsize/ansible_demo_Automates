@@ -11,6 +11,10 @@
           enabled: yes
           gpgkey: https://packages.grafana.com/gpg.key
           description: grafana
+      - name: Installing grafana server
+        package:
+          name: grafana
+          state: present
       - name:
         service:
           name: grafana-server # required. Name of the service.
