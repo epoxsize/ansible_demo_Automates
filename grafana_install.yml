@@ -31,3 +31,5 @@
 #### Setting up grafana server
       - name: Setting up Grafana Password
         command: 'grafana-cli admin reset-admin-password {{ influxdb_password }}'
+     when:
+      - "'mgmt' in group_names" 
