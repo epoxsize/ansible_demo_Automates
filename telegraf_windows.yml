@@ -7,7 +7,7 @@
        state: present
     - name: Setting up Telegraf config
       win_template:
-        src: telegraf.j2 # required. Path of a Jinja2 formatted template on the local server. This can be a relative or absolute path.
+        src: telegraf_win.j2 # required. Path of a Jinja2 formatted template on the local server. This can be a relative or absolute path.
         dest: C:\Program Files\telegraf\telegraf.conf # required. Location to render the template to on the remote machine.
         force: yes # not required. If C(yes), will replace the remote file when contents are different from the source.,If C(no), the file will only be transferred if the destination does not exist.
     - name: Copying file to windows host
