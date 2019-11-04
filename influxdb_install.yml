@@ -8,6 +8,7 @@
             name: influxdb_repo
             baseurl: https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
             gpgcheck: yes
+            enabled: yes
             description: Influxdb Repository from influxdata.com
         - name: Installing InfluxDB
           package:
