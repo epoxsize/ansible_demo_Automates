@@ -42,5 +42,7 @@
             name: InfluxDBAnsible-Demo # required. The name of the datasource.
             database: '{{ influxdb_database_name }}'
             url: http://localhost:8086 # required. The URL of the datasource.
+            grafana_user: admin
+            grafana_password: '{{ grafana_password }}'
      when:
       - "'mgmt' in group_names" 
