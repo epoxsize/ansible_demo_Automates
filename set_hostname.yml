@@ -1,6 +1,6 @@
 ---
 - hosts: all
   tasks:
-    - name: Setting up Hostname according to the tower invenory
+    - name: Setting up Hostname according to the tower invenory for Linux
       hostname:
-        name: "{{ inventory_hostname }}" 
+        name: '{{ inventory_hostname }}'

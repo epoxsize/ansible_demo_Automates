@@ -1,0 +1,7 @@
+---
+- hosts: all
+  tasks:
+    - name: Installing telegraf
+      win_chocolatey:
+       name: telegraf
+       state: present
