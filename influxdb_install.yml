@@ -52,4 +52,4 @@
               database_name: "{{influxdb_database_name}}"
       #### Handlers for handle some changes in configuration
       when:
-       - influxdb_server
+       - "'mgmt' in group_names"
