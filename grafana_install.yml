@@ -53,7 +53,6 @@
             url: http://localhost:3000 # required. The Grafana URL.
             state: present # required. choices: absent;export;present. State of the dashboard.
             url_password: '{{ grafana_password }}' # not required. The Grafana API password.
-            grafana_api_key: undefined # not required. The Grafana API key.,If set, I(grafana_user) and I(grafana_password) will be ignored.
             url_username: admin # not required. The Grafana API user.
             path: /tmp/ansible_demo_dashboard.json
             overwrite: yes
