@@ -3,11 +3,12 @@
   tasks:
    - name: Add Telegraf Repository
      yum_repository:
-      name: InfluxDB Repository
+      name: influxdb
       baseurl: https://repos.influxdata.com/rhel/$releasever/$basearch/stable
-      gpgcheck: no
+      gpgcheck: yes
       enabled: yes
-      description: Influxdb Repository from influxdata.com
+      gpgkey: https://repos.influxdata.com/influxdb.key
+      description: influxdb
      when: 
      - ansible_system == "Linux"
    - name: Install telegraf package
