@@ -46,10 +46,10 @@
             grafana_password: '{{ grafana_password }}'
       - name: Copy json file with pre-defined dashboard
         copy:
-          src: ansible_demo_dashboard.json
+          src: ./ansible_demo_dashboard.json
           dest: /tmp/ansible_demo_dashboard.json
           mode: 0777
-          remote_src: true
+          remote_src: false
       - name: Import Grafana Dashboard
         grafana_dashboard:
             url: http://localhost:3000 # required. The Grafana URL.
