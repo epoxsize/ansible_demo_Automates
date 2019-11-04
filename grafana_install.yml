@@ -49,13 +49,5 @@
           src: ansible_demo_dashboard.j2
           dest: /tmp/ansible_demo_dashboard.json
           mode: 0777
-      - name: Import Grafana Dashboard
-        grafana_dashboard:
-            url: http://localhost:3000 # required. The Grafana URL.
-            state: present # required. choices: absent;export;present. State of the dashboard.
-            grafana_password: '{{ grafana_password }}' # not required. The Grafana API password.
-            grafana_user: admin # not required. The Grafana API user.
-            path: /tmp/ansible_demo_dashboard.json
-            overwrite: yes
      when:
       - "'mgmt' in group_names" 
