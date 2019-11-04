@@ -1,8 +1,0 @@
-#### RHEL LOCAL SERVER VARIABLES
-
-ansible_user: dmitry
-ansible_password: redhat
-ansible_sudo_pass: redhat
-rhsm_username: dmalekhin
-rhsm_password: Password@rhel.02
-rhsm_actkey: ansible_lab
