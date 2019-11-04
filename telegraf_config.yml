@@ -5,7 +5,7 @@
      yum_repository:
       name: InfluxDB Repository
       baseurl: https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
-      gpgcheck: yes
+      gpgcheck: no
       enabled: yes
       description: Influxdb Repository from influxdata.com
      when: 
