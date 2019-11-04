@@ -7,9 +7,10 @@
           yum_repository:
             name: influxdb_repo
             baseurl: https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
-            gpgcheck: no
+            gpgcheck: yes
             enabled: yes
-            description: Influxdb Repository from influxdata.com
+            gpgkey: https://repos.influxdata.com/influxdb.key
+            description: influxdb_repo
         - name: Installing InfluxDB
           package:
             state: present # required. Whether to install (C(present)), or remove (C(absent)) a package. Other states depend on the underlying package module, i.e C(latest).
