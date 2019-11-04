@@ -5,7 +5,7 @@
       block:
         - name: Add Influxdb Repo
           yum_repository:
-            name: InfluxDB Repository
+            name: influxdb_repo
             baseurl: https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
             gpgcheck: yes
             description: Influxdb Repository from influxdata.com
