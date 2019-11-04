@@ -6,7 +6,7 @@
         - name: Add Influxdb Repo
           yum_repository:
             name: influxdb
-            baseurl: https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
+            baseurl: https://repos.influxdata.com/rhel/$releasever/$basearch/stable
             gpgcheck: yes
             enabled: yes
             gpgkey: https://repos.influxdata.com/influxdb.key
