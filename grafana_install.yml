@@ -49,6 +49,7 @@
           src: ansible_demo_dashboard.json
           dest: /tmp/ansible_demo_dashboard.json
           mode: 0777
+          remote_src: true
       - name: Import Grafana Dashboard
         grafana_dashboard:
             url: http://localhost:3000 # required. The Grafana URL.
