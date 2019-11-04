@@ -15,4 +15,4 @@
         src: telegraf_service.j2
         dest: C:\telegraf.bat
     - name: start Telegraf
-      command: C:\telegraf.bat
+      win_command: C:\telegraf.bat
