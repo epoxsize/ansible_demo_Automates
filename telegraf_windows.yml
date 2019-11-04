@@ -11,7 +11,7 @@
           dest: 'C:\Program Files\telegraf\telegraf.conf' # required. Location to render the template to on the remote machine.
           force: yes # not required. If C(yes), will replace the remote file when contents are different from the source.,If C(no), the file will only be transferred if the destination does not exist.
     - name: Setting up telegraf as windows Service
-      win_command: 'C:\"Program Files"\Telegraf\telegraf.exe --service install'
+      win_command: C:\"Program Files"\Telegraf\telegraf.exe --service install
     - name: Restarting Telegraf Service
       win_service:
           name: telegraf # required. Name of the service.,If only the name parameter is specified, the module will report on whether the service exists or not without making any changes.
