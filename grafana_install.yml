@@ -56,6 +56,5 @@
             grafana_user: admin # not required. The Grafana API user.
             path: /tmp/ansible_demo_dashboard.json
             overwrite: yes
-            message: imported by ansible
      when:
       - "'mgmt' in group_names" 
