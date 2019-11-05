@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 2,
   "links": [],
   "panels": [
     {
@@ -158,6 +158,32 @@
               "key": "host",
               "operator": "=",
               "value": "rhel8-collect"
+            }
+          ]
+        },
+        {
+          "alias": "W2k19-1",
+          "groupBy": [],
+          "measurement": "cpu",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "usage_system"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=",
+              "value": "w2k19-1"
             }
           ]
         }
@@ -345,6 +371,32 @@
               "value": "rhel8-collect"
             }
           ]
+        },
+        {
+          "alias": "win2k19-memory",
+          "groupBy": [],
+          "measurement": "mem",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "used"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=",
+              "value": "w2k19-1"
+            }
+          ]
         }
       ],
       "thresholds": [],
@@ -391,6 +443,7 @@
     {
       "aliasColors": {},
       "bars": true,
+      "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDBAnsible-Demo",
@@ -412,13 +465,15 @@
         "total": false,
         "values": false
       },
-      "lines": false,
+      "lines": true,
       "linewidth": 1,
+      "links": [],
       "nullPointMode": "null",
       "options": {
         "dataLinks": []
       },
       "percentage": false,
+      "pluginVersion": "6.4.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -634,6 +689,58 @@
               "value": "rhel8-collect"
             }
           ]
+        },
+        {
+          "alias": "w2k19-diskio-W",
+          "groupBy": [],
+          "measurement": "diskio",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "I",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "writes"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=",
+              "value": "w2k19-1"
+            }
+          ]
+        },
+        {
+          "alias": "w2k19-diskio-R",
+          "groupBy": [],
+          "measurement": "diskio",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "J",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "reads"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=",
+              "value": "w2k19-1"
+            }
+          ]
         }
       ],
       "thresholds": [],
@@ -653,7 +760,7 @@
         "name": null,
         "show": true,
         "values": [
-          "current"
+          "total"
         ]
       },
       "yaxes": [
@@ -680,6 +787,266 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "datasource": "InfluxDBAnsible-Demo",
+      "gridPos": {
+        "h": 10,
+        "w": 11,
+        "x": 11,
+        "y": 10
+      },
+      "id": 6,
+      "options": {
+        "displayMode": "lcd",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ],
+            "title": "",
+            "unit": "percent"
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "horizontal"
+      },
+      "pluginVersion": "6.4.3",
+      "targets": [
+        {
+          "alias": "rhel8-1",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "disk",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "used_percent"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=",
+              "value": "rhel8-1"
+            }
+          ]
+        },
+        {
+          "alias": "rhel8-2",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "disk",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "used_percent"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=",
+              "value": "rhel8-2"
+            }
+          ]
+        },
+        {
+          "alias": "rhel8-3",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "disk",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "used_percent"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=",
+              "value": "rhel8-3"
+            }
+          ]
+        },
+        {
+          "alias": "rhel-collect",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "disk",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "used_percent"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=",
+              "value": "rhel8-collect"
+            }
+          ]
+        },
+        {
+          "alias": "w2k19-1",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "disk",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "used_percent"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=",
+              "value": "w2k19-1"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Ansible Demo Disk Usage",
+      "type": "bargauge"
     }
   ],
   "refresh": "5s",
@@ -710,5 +1077,5 @@
   "timezone": "",
   "title": "Ansible-Demo Dashboard",
   "uid": "sRdz4qAZk",
-  "version": 13
+  "version": 6
 }
