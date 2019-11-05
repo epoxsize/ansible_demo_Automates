@@ -1,0 +1,20 @@
+---
+- name: Starting VM for Ansible TowerDemo
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: yes
+  tasks:
+  - name: Starting VMs for Demo
+    virt:
+      name: '{{ item }}'
+      state: running
+    loop:
+      - rhel8-1
+      - rhel8-2
+      - rhel8-3
+      - rhel8-collect
+      - tower
+      - win2k19-1
+  - name: Showing Hostname Info
+    debug:
+      msg: '{{ ansible_memory_mb }}'

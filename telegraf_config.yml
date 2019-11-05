@@ -9,14 +9,10 @@
       enabled: yes
       gpgkey: https://repos.influxdata.com/influxdb.key
       description: influxdb
-     when: 
-     - ansible_system == "Linux"
    - name: Install telegraf package
      package:
       name: telegraf
       state: present
-     when: 
-     - ansible_system == "Linux"
 
 #### Setting up telegraf config for Linux systems
    
@@ -25,22 +21,16 @@
       src: telegraf.j2
       dest: /etc/telegraf/telegraf.conf
      notify: Restart telegraf service
-     when: 
-     - ansible_system == "Linux"
    - name: Enable Telegraf Service
      service:
       name: telegraf
       state: started
-     when: 
-     - ansible_system == "Linux"
 
   handlers: 
     - name: Restart telegraf service
       service:
         name: telegraf
         state: restarted
-      when: 
-      - ansible_system == "Linux"
 
       
 

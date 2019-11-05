@@ -1,0 +1,17 @@
+---
+- hosts: all
+  tasks:
+    - name: Removing Packages from the past deployment
+      package:
+          state: absent
+          name: "{{ item }}"
+      with_items:
+        - tmux
+        - mc
+    - name: Remove Telegraf Packages
+      package:
+          state: absent
+          name: telegraf
+    - name: Remove Telegraf Config
+      state: absent
+      path: /etc/telegraf/telegraf.conf

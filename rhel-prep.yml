@@ -9,7 +9,9 @@
           force_register: no
       tags: register_rhel
       when: enable_rhsm|bool == True
-
+#####
+##### RHSM registration works only when its enabled during workflow process
+#####
     - name: Disabling all repos
       rhsm_repository:
           state: disabled 
@@ -53,6 +55,7 @@
         - ansible_distribution == "RedHat"
         - ansible_distribution_major_version == "8"
         - enable_rhsm|bool == True
+##### Installing some packages for testing purposes
     - name: Installing packages for basework
       package:
           state: present
@@ -60,3 +63,4 @@
       with_items:
         - tmux
         - mc
+      when: install_test_pkg|bool == True
