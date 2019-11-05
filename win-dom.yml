@@ -1,9 +1,0 @@
----
-- hosts: windom
-  gather_facts: true
-  tasks:
-    - name: Create Domain for Demo
-      win_domain:
-        dns_domain_name: automates.demo
-        safe_mode_password: 123qweASD
-    - win_reboot:
